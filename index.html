@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GhostGuard - Supporting Healthy Relationships</title>
+    <meta name="description" content="Biblical guidance and support for dealing with ghosting in relationships">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        .app-container {
+            max-width: 414px;
+            margin: 0 auto;
+            background: #ffffff;
+            min-height: 100vh;
+            position: relative;
+            box-shadow: 0 0 30px rgba(0,0,0,0.2);
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px 20px;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .language-toggle {
+            position: absolute;
+            top: 25px;
+            right: 20px;
+            background: rgba(255,255,255,0.25);
+            border: 1px solid rgba(255,255,255,0.4);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .language-toggle:hover {
+            background: rgba(255,255,255,0.35);
+            transform: translateY(-1px);
+        }
+
+        .app-title {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .app-subtitle {
+            font-size: 16px;
+            opacity: 0.9;
+            font-weight: 400;
+        }
+
+        .content {
+            padding: 20px;
+            padding-bottom: 120px;
+            min-height: calc(100vh - 200px);
+        }
+
+        .section {
+            display: none;
+            animation: fadeIn 0.4s ease-in;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .crisis-banner {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a52);
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(255,107,107,0.3);
+        }
+
+        .crisis-banner h3 {
+            margin-bottom: 15px;
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .crisis-links {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .crisis-link {
+            background: rgba(255,255,255,0.25);
+            color: white;
+            padding: 10px 18px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 500;
+            border: 1px solid rgba(255,255,255,0.3);
+            transition: all 0.3s ease;
+        }
+
+        .crisis-link:hover {
+            background: rgba(255,255,255,0.35);
+            transform: translateY(-2px);
+        }
+
+        .card {
+            background: white;
+            border-radius: 16px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            border: 1px solid #f0f0f0;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+        }
+
+        .card h2, .card h3 {
+            color: #333;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .card h2 {
+            font-size: 22px;
+            color: #667eea;
+        }
+
+        .card h3 {
+            font-size: 18px;
+        }
+
+        .card p {
+            line-height: 1.6;
+            color: #555;
+        }
+
+        .bible-verse {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            padding: 25px;
+            border-radius: 16px;
+            margin-bottom: 25px;
+            text-align: center;
+            font-style: italic;
+            box-shadow: 0 4px 20px rgba(252,182,159,0.3);
+        }
+
+        .bible-verse p {
+            font-size: 16px;
+            color: #8b4513;
+            font-weight: 500;
+            line-height: 1.5;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .feature-card {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 25px 20px;
+            border-radius: 16px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(240,147,251,0.3);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 8px 25px rgba(240,147,251,0.4);
+        }
+
+        .feature-card h3 {
+            font-size: 16px;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .feature-card p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .info-section {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            padding: 25px;
+            border-radius: 16px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 20px rgba(168,237,234,0.3);
+        }
+
+        .info-section h2 {
+            color: #2c5282;
+            margin-bottom: 15px;
+            font-size: 20px;
+        }
+
+        .info-section p {
+            color: #2d3748;
+            line-height: 1.6;
+        }
+
+        .support-item {
+            background: #f8fffe;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            border-left: 4px solid #38b2ac;
+            box-shadow: 0 2px 10px rgba(56,178,172,0.1);
+        }
+
+        .support-item h3 {
+            color: #2c7a7b;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        .community-post {
+            background: #f7fafc;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            border-left: 4px solid #4299e1;
+            box-shadow: 0 2px 10px rgba(66,153,225,0.1);
+        }
+
+        .community-post h4 {
+            color: #2b6cb0;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        .tips-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .tips-list li {
+            background: #e6fffa;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            border-left: 3px solid #38b2ac;
+            color: #234e52;
+            line-height: 1.5;
+        }
+
+        .profile-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .profile-item:last-child {
+            border-bottom: none;
+        }
+
+        .profile-item span:first-child {
+            font-weight: 500;
+            color: #4a5568;
+        }
+
+        .profile-item span:last-child, .profile-item button {
+            color: #667eea;
+            font-weight: 500;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 30px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 15px;
+            font-size: 16px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(102,126,234,0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102,126,234,0.4);
+        }
+
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 414px;
+            background: white;
+            display: flex;
+            justify-content: space-around;
+            padding: 15px 0 20px 0;
+            box-shadow: 0 -4px 20px rgba(0,0,0,0.1);
+            border-top: 1px solid #f0f0f0;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            padding: 8px 12px;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            min-width: 60px;
+        }
+
+        .nav-item:hover {
+            background: #f7fafc;
+        }
+
+        .nav-item.active {
+            background: #edf2f7;
+        }
+
+        .nav-icon {
+            width: 24px;
+            height: 24px;
+            margin-bottom: 6px;
+            fill: #a0aec0;
+            transition: fill 0.3s ease;
+        }
+
+        .nav-item.active .nav-icon {
+            fill: #667eea;
+        }
+
+        .nav-text {
+            font-size: 11px;
+            color: #a0aec0;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-item.active .nav-text {
+            color: #667eea;
+        }
+
+        @media (max-width: 480px) {
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .crisis-links {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .content {
+                padding: 15px;
+                padding-bottom: 120px;
+            }
+        }
+
+        .hidden {
+            display: none !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <div class="header">
+            <button class="language-toggle" id="langToggle">
+                <span id="langToggleText">FI/EN</span>
+            </button>
+            <h1 class="app-title" id="appTitle">GhostGuard</h1>
+            <p class="app-subtitle" id="appSubtitle">Supporting healthy relationships</p>
+        </div>
+
+        <div class="content">
+            <!-- HOME SECTION -->
+            <div id="home" class="section active">
+                <div class="crisis-banner">
+                    <h3 id="crisisTitle">Need immediate help?</h3>
+                    <div class="crisis-links">
+                        <a href="tel:116123" class="crisis-link" id="crisisFinland">Crisis Line FI: 116 123</a>
+                        <a href="tel:+358201552333" class="crisis-link">MIELI: 020 155 233</a>
+                        <a href="https://sekasin.fi" class="crisis-link" target="_blank" id="crisisChat">Crisis Chat</a>
+                    </div>
+                </div>
+
+                <div class="bible-verse">
+                    <p id="bibleQuote">"Be kind to one another, tenderhearted, forgiving one another, as God in Christ forgave you." - Ephesians 4:32</p>
+                </div>
+
+                <div class="feature-grid">
+                    <div class="feature-card" id="learnCard">
+                        <h3 id="learnAbout">Learn About</h3>
+                        <p id="learnDesc">Ghosting</p>
+                    </div>
+                    <div class="feature-card" id="supportCard">
+                        <h3 id="getSupport">Get Support</h3>
+                        <p id="supportDesc">Resources</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h2 id="welcomeTitle">Welcome to GhostGuard</h2>
+                    <p id="welcomeText">GhostGuard is here to help you navigate the challenges of ghosting in relationships. Whether you've been ghosted or are struggling with communication, we provide biblical wisdom, practical support, and a caring community.</p>
+                </div>
+            </div>
+
+            <!-- LEARN SECTION -->
+            <div id="learn" class="section">
+                <div class="info-section">
+                    <h2 id="whatIsGhosting">What is Ghosting?</h2>
+                    <p id="ghostingDefinition">Ghosting is when someone suddenly cuts off all communication without explanation. It can happen in friendships, romantic relationships, or any personal connection.</p>
+                </div>
+
+                <div class="card">
+                    <h3 id="biblicalPerspective">Biblical Perspective</h3>
+                    <p id="biblicalText">"Let your yes be yes, and your no be no" (Matthew 5:37). God calls us to honest, clear communication. While ghosting might seem easier, it doesn't reflect the love and respect we're called to show others.</p>
+                </div>
+
+                <div class="card">
+                    <h3 id="whyPeopleGhost">Why Do People Ghost?</h3>
+                    <ul class="tips-list">
+                        <li id="ghostReason1">Fear of confrontation or difficult conversations</li>
+                        <li id="ghostReason2">Feeling overwhelmed by emotions</li>
+                        <li id="ghostReason3">Lack of communication skills</li>
+                        <li id="ghostReason4">Past trauma or relationship anxiety</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3 id="healthyAlternatives">Healthy Alternatives</h3>
+                    <ul class="tips-list">
+                        <li id="alternative1">Be honest about your feelings and intentions</li>
+                        <li id="alternative2">Take time to process before responding</li>
+                        <li id="alternative3">Seek help from trusted friends or counselors</li>
+                        <li id="alternative4">Practice "I" statements to express your needs</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- SUPPORT SECTION -->
+            <div id="support" class="section">
+                <div class="crisis-banner">
+                    <h3 id="crisisResources">Crisis Resources - Finland</h3>
+                    <div class="crisis-links">
+                        <a href="tel:116123" class="crisis-link">Crisis Line: 116 123</a>
+                        <a href="tel:116111" class="crisis-link">Youth: 116 111</a>
+                        <a href="tel:+358201552333" class="crisis-link">MIELI: 020 155 233</a>
+                        <a href="https://tukinet.net" class="crisis-link" target="_blank">TukiNet.net</a>
+                    </div>
+                </div>
+
+                <div class="support-item">
+                    <h3 id="ifYouveBeenGhosted">If You've Been Ghosted</h3>
+                    <p id="ghostedAdvice">It's natural to feel confused, hurt, or angry. Remember that ghosting often says more about the other person's ability to communicate than about your worth.</p>
+                </div>
+
+                <div class="support-item">
+                    <h3 id="prayerSupport">Prayer & Spiritual Support</h3>
+                    <p id="prayerText">"Cast all your anxiety on him because he cares for you" (1 Peter 5:7). Find comfort in prayer and connect with your local church community.</p>
+                </div>
+
+                <div class="support-item">
+                    <h3 id="professionalHelp">Professional Help</h3>
+                    <p id="professionalText">Consider speaking with a counselor, therapist, or trusted pastor who can provide personalized guidance and support.</p>
+                </div>
+
+                <div class="support-item">
+                    <h3 id="youthResources">Youth Resources Finland</h3>
+                    <p id="youthText">Nuorten kriisipuhelin: 116 111 (free, confidential support for young people under 25)</p>
+                </div>
+            </div>
+
+            <!-- COMMUNITY SECTION -->
+            <div id="community" class="section">
+                <div class="card">
+                    <h2 id="communityTitle">Community Support</h2>
+                    <p id="communityIntro">Connect with others who understand your experience. Share encouragement and find hope together.</p>
+                </div>
+
+                <div class="community-post">
+                    <h4 id="post1Title">Sarah's Story</h4>
+                    <p id="post1Text">"Being ghosted by my best friend was devastating, but I learned that God's love never fails. Finding a supportive church community helped me heal."</p>
+                </div>
+
+                <div class="community-post">
+                    <h4 id="post2Title">Mark's Reflection</h4>
+                    <p id="post2Text">"I realized I was ghosting people because I was afraid of conflict. Learning to communicate with grace and truth has transformed my relationships."</p>
+                </div>
+
+                <div class="community-post">
+                    <h4 id="post3Title">Daily Encouragement</h4>
+                    <p id="post3Text">"You are fearfully and wonderfully made (Psalm 139:14). Your worth isn't determined by how others treat you, but by God's unchanging love."</p>
+                </div>
+
+                <button class="btn-primary" id="shareStoryBtn">Share Your Story</button>
+            </div>
+
+            <!-- PROFILE SECTION -->
+            <div id="profile" class="section">
+                <div class="card">
+                    <h2 id="profileTitle">Profile & Settings</h2>
+                </div>
+
+                <div class="card">
+                    <div class="profile-item">
+                        <span id="languagePref">Language Preference</span>
+                        <button id="langButton" style="background:none;border:none;color:#667eea;cursor:pointer;">English/Suomi</button>
+                    </div>
+
+                    <div class="profile-item">
+                        <span id="crisisContacts">Crisis Contacts</span>
+                        <span id="savedText" style="color:#38b2ac;">Saved</span>
+                    </div>
+
+                    <div class="profile-item">
+                        <span id="prayerReminders">Prayer Reminders</span>
+                        <span id="dailyText" style="color:#38b2ac;">Daily</span>
+                    </div>
+
+                    <div class="profile-item">
+                        <span id="appVersion">App Version</span>
+                        <span style="color:#718096;">1.0.0</span>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3 id="aboutTitle">About GhostGuard</h3>
+                    <p id="aboutText">Created with love to support healthy, Christ-centered relationships. Remember: you are valued, loved, and never alone.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="bottom-nav">
+            <div class="nav-item active" data-section="home">
+                <svg class="nav-icon" viewBox="0 0 24 24">
+                    <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+                </svg>
+                <span class="nav-text" id="navHome">Home</span>
+            </div>
+            <div class="nav-item" data-section="learn">
+                <svg class="nav-icon" viewBox="0 0 24 24">
+                    <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/>
+                </svg>
+                <span class="nav-text" id="navLearn">Learn</span>
+            </div>
+            <div class="nav-item" data-section="support">
+                <svg class="nav-icon" viewBox="0 0 24 24">
+                    <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
+                </svg>
+                <span class="nav-text" id="navSupport">Support</span>
+            </div>
+            <div class="nav-item" data-section="community">
+                <svg class="nav-icon" viewBox="0 0 24 24">
+                    <path d="M16 4c0-1.11.89-2 2-2s2 .89 2 2-.89 2-2 2-2-.89-2-2zm4 18v-6h2.5l-2.54-7.63A2.996 2.996 0 0 0 17.06 7H14.94c-1.3 0-2.42.84-2.84 2.06L9.5 16H12v6h8zM12.5 11.5c.83 0 1.5-.67 1.5-1.5s-.67-1.5-1.5-1.5S11 9.17 11 10s.67 1.5 1.5 1.5zM5.5 6c1.11 0 2-.89 2-2s-.89-2-2-2-2 .89-2 2 .89 2 2 2zm2.5 16v-7H6l2.5-7.27A1.49 1.49 0 0 0 7.06 6H5.94c-.8 0-1.53.5-1.85 1.26L1.5 15H4v7h4z"/>
+                </svg>
+                <span class="nav-text" id="navCommunity">Community</span>
+            </div>
+            <div class="nav-item" data-section="profile">
+                <svg class="nav-icon" viewBox="0 0 24 24">
+                    <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                </svg>
+                <span class="nav-text" id="navProfile">Profile</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentLanguage = 'en';
+        
+        const translations = {
+            en: {
+                appTitle: 'GhostGuard',
+                appSubtitle: 'Supporting healthy relationships',
+                crisisTitle: 'Need immediate help?',
+                crisisFinland: 'Crisis Line FI: 116 123',
+                crisisChat: 'Crisis Chat',
+                bibleQuote: '"Be kind to one another, tenderhearted, forgiving one another, as God in Christ forgave you." - Ephesians 4:32',
+                learnAbout: 'Learn About',
+                learnDesc: 'Ghosting',
+                getSupport: 'Get Support',
+                supportDesc: 'Resources',
+                welcomeTitle: 'Welcome to GhostGuard',
+                welcomeText: 'GhostGuard is here to help you navigate the challenges of ghosting in relationships. Whether you\'ve been ghosted or are struggling with communication, we provide biblical wisdom, practical support, and a caring community.',
+                whatIsGhosting: 'What is Ghosting?',
+                ghostingDefinition: 'Ghosting is when someone suddenly cuts off all communication without explanation. It can happen in friendships, romantic relationships, or any personal connection.',
+                biblicalPerspective: 'Biblical Perspective',
+                biblicalText: '"Let your yes be yes, and your no be no" (Matthew 5:37). God calls us to honest, clear communication. While ghosting might seem easier, it doesn\'t reflect the love and respect we\'re called to show others.',
+                whyPeopleGhost: 'Why Do People Ghost?',
+                ghostReason1: 'Fear of confrontation or difficult conversations',
+                ghostReason2: 'Feeling overwhelmed by emotions',
+                ghostReason3: 'Lack of communication skills',
+                ghostReason4: 'Past trauma or relationship anxiety',
+                healthyAlternatives: 'Healthy Alternatives',
+                alternative1: 'Be honest about your feelings and intentions',
+                alternative2: 'Take time to process before responding',
+                alternative3: 'Seek help from trusted friends or counselors',
+                alternative4: 'Practice "I" statements to express your needs',
+                crisisResources: 'Crisis Resources - Finland',
+                ifYouveBeenGhosted: 'If You\'ve Been Ghosted',
+                ghostedAdvice: 'It\'s natural to feel confused, hurt, or angry. Remember that ghosting often says more about the other person\'s ability to communicate than about your worth.',
+                prayerSupport: 'Prayer & Spiritual Support',
+                prayerText: '"Cast all your anxiety on him because he cares for you" (1 Peter 5:7). Find comfort in prayer and connect with your local church community.',
+                professionalHelp: 'Professional Help',
+                professionalText: 'Consider speaking with a counselor, therapist, or trusted pastor who can provide personalized guidance and support.',
+                youthResources: 'Youth Resources Finland',
+                youthText: 'Nuorten kriisipuhelin: 116 111 (free, confidential support for young people under 25)',
+                communityTitle: 'Community Support',
+                communityIntro: 'Connect with others who understand your experience. Share encouragement and find hope together.',
+                post1Title: 'Sarah\'s Story',
+                post1Text: '"Being ghosted by my best friend was devastating, but I learned that God\'s love never fails. Finding a supportive church community helped me heal."',
+                post2Title: 'Mark\'s Reflection',
+                post2Text: '"I realized I was ghosting people because I was afraid of conflict. Learning to communicate with grace and truth has transformed my relationships."',
+                post3Title: 'Daily Encouragement',
+                post3Text: '"You are fearfully and wonderfully made (Psalm 139:14). Your worth isn\'t determined by how others treat you, but by God\'s unchanging love."',
+                shareStoryBtn: 'Share Your Story',
+                profileTitle: 'Profile & Settings',
+                languagePref: 'Language Preference',
+                langButton: 'English/Suomi',
+                crisisContacts: 'Crisis Contacts',
+                savedText: 'Saved',
+                prayerReminders: 'Prayer Reminders',
+                dailyText: 'Daily',
+                appVersion: 'App Version',
+                aboutTitle: 'About GhostGuard',
+                aboutText: 'Created with love to support healthy, Christ-centered relationships. Remember: you are valued, loved, and never alone.',
+                navHome: 'Home',
+                navLearn: 'Learn',
+                navSupport: 'Support',
+                navCommunity: 'Community',
+                navProfile: 'Profile'
+            },
+            fi: {
+                appTitle: 'HaamuVahti',
+                appSubtitle: 'Tukee terveitä suhteita',
+                crisisTitle: 'Tarvitsetko välitöntä apua?',
+                crisisFinland: 'Kriisipuhelin: 116 123',
+                crisisChat: 'Kriisichat',
+                bibleQuote: '"Olkaa ystävällisiä toisianne kohtaan, lempeitä, antakaa anteeksi toisillenne, niin kuin Jumalakin on antanut teille anteeksi Kristuksessa." - Efesolaiskirje 4:32',
+                learnAbout: 'Opi',
+                learnDesc: 'Haamuilusta',
+                getSupport: 'Hae Tukea',
+                supportDesc: 'Resurssit',
+                welcomeTitle: 'Tervetuloa HaamuVahtiin',
+                welcomeText: 'HaamuVahti on täällä auttamaan sinua navigoimaan haamuilu-ongelmia suhteissa. Olipa sinua haamuiltu tai kamppaile kommunikoinnin kanssa, tarjoamme raamatullista viisautta, käytännön tukea ja välittävän yhteisön.',
+                whatIsGhosting: 'Mitä on haamuilu?',
+                ghostingDefinition: 'Haamuilu tarkoittaa sitä, kun joku yhtäkkiä lopettaa kaiken viestinnän ilman selitystä. Se voi tapahtua ystävyyssuhteissa, romanttisissa suhteissa tai missä tahansa henkilökohtaisessa yhteydessä.',
+                biblicalPerspective: 'Raamatullinen näkökulma',
+                biblicalText: '"Sanakoot kyllä kyllänne ja ei einnä" (Matteus 5:37). Jumala kutsuu meitä rehelliseen, selkeään viestintään. Vaikka haamuilu saattaa tuntua helpommalta, se ei heijasta rakkautta ja kunnioitusta, jota meidän tulee osoittaa toisille.',
+                whyPeopleGhost: 'Miksi ihmiset haamuilevat?',
+                ghostReason1: 'Pelko yhteenotoista tai vaikeista keskusteluista',
+                ghostReason2: 'Tunteiden ylivoimaisuus',
+                ghostReason3: 'Kommunikointitaitojen puute',
+                ghostReason4: 'Aiemmat traumat tai suhdeahdistus',
+                healthyAlternatives: 'Terveelliset vaihtoehdot',
+                alternative1: 'Ole rehellinen tunteistasi ja aikeistasi',
+                alternative2: 'Ota aikaa käsitellä ennen vastaamista',
+                alternative3: 'Hae apua luotetuilta ystäviltä tai neuvonantajilta',
+                alternative4: 'Harjoittele "minä"-lauseita tarpeidesi ilmaisemiseksi',
+                crisisResources: 'Kriisiresurssit - Suomi',
+                ifYouveBeenGhosted: 'Jos sinua on haamuiltu',
+                ghostedAdvice: 'On luonnollista tuntea hämmennystä, loukkaantumista tai vihaa. Muista, että haamuilu kertoo usein enemmän toisen henkilön kyvystä kommunikoida kuin sinun arvostasi.',
+                prayerSupport: 'Rukous ja hengellinen tuki',
+                prayerText: '"Heittäkää kaikki huolenne hänen huostaan, sillä hän pitää teistä huolta" (1. Pietarin kirje 5:7). Löydä lohdutus rukouksesta ja yhteys paikalliseen seurakuntayhteisöön.',
+                professionalHelp: 'Ammatillinen apu',
+                professionalText: 'Harkitse keskustelua neuvonantajan, terapeutin tai luotetun pastorin kanssa, joka voi tarjota henkilökohtaista ohjausta ja tukea.',
+                youthResources: 'Nuorten resurssit Suomessa',
+                youthText: 'Nuorten kriisipuhelin: 116 111 (ilmainen, luottamuksellinen tuki alle 25-vuotiaille)',
+                communityTitle: 'Yhteisötuki',
+                communityIntro: 'Ota yhteys muihin, jotka ymmärtävät kokemuksesi. Jaa rohkaisua ja löydä toivo yhdessä.',
+                post1Title: 'Saaran tarina',
+                post1Text: '"Parhaan ystäväni haamuilu oli tuhoisaa, mutta opin, että Jumalan rakkaus ei koskaan petä. Tukevan seurakuntayhteisön löytäminen auttoi minua parantumaan."',
+                post2Title: 'Markon pohdinta',
+                post2Text: '"Tajusin haamuilevani ihmisiä, koska pelkäsin konflikteja. Oppiminen kommunikoimaan armollisesti ja totuudenmukaisesti on muuttanut suhteeni."',
+                post3Title: 'Päivittäinen rohkaisu',
+                post3Text: '"Sinä olet ihmeellisellä tavalla tehty" (Psalmi 139:14). Arvoasi ei määritä se, miten muut kohtelevat sinua, vaan Jumalan muuttumaton rakkaus."',
+                shareStoryBtn: 'Jaa tarinasi',
+                profileTitle: 'Profiili ja asetukset',
+                languagePref: 'Kielivalinta',
+                langButton: 'English/Suomi',
+                crisisContacts: 'Kriisikontaktit',
+                savedText: 'Tallennettu',
+                prayerReminders: 'Rukousmuistutukset',
+                dailyText: 'Päivittäin',
+                appVersion: 'Sovelluksen versio',
+                aboutTitle: 'Tietoa HaamuVahdista',
+                aboutText: 'Luotu rakkaudella tukemaan terveitä, Kristus-keskeisiä suhteita. Muista: sinä olet arvokas, rakastettu, etkä koskaan yksin.',
+                navHome: 'Koti',
+                navLearn: 'Opi',
+                navSupport: 'Tuki',
+                navCommunity: 'Yhteisö',
+                navProfile: 'Profiili'
+            }
+        };
+
+        function showSection(sectionId) {
+            // Hide all sections
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => section.classList.remove('active'));
+            
+            // Show selected section
+            const targetSection = document.getElementById(sectionId);
+            if (targetSection) {
+                targetSection.classList.add('active');
+            }
+            
+            // Update navigation
+            const navItems = document.querySelectorAll('.nav-item');
+            navItems.forEach(item => item.classList.remove('active'));
+            
+            // Find and activate the correct nav item
+            const targetNavItem = document.querySelector(`[data-section="${sectionId}"]`);
+            if (targetNavItem) {
+                targetNavItem.classList.add('active');
+            }
+        }
+
+        function toggleLanguage() {
+            currentLanguage = currentLanguage === 'en' ? 'fi' : 'en';
+            updateLanguage();
+            localStorage.setItem('ghostguard_language', currentLanguage);
+        }
+
+        function updateLanguage() {
+            const texts = translations[currentLanguage];
+            
+            for (const [key, text] of Object.entries(texts)) {
+                const element = document.getElementById(key);
+                if (element) {
+                    element.textContent = text;
+                }
+            }
+            
+            // Update language toggle text
+            const toggleText = document.getElementById('langToggleText');
+            if (toggleText) {
+                toggleText.textContent = currentLanguage === 'en' ? 'FI/EN' : 'EN/FI';
+            }
+        }
+
+        function shareStory() {
+            const message = currentLanguage === 'en' ? 
+                'Thank you for wanting to share your story. Your experience can help others heal and find hope. Consider reaching out to a trusted pastor or counselor to share your testimony.' :
+                'Kiitos halustasi jakaa tarinasi. Kokemuksesi voi auttaa muita parantumaan ja löytämään toivoa. Harkitse yhteydenottoa luotettuun pastoriin tai neuvonantajaan jakaaksesi todistuksesi.';
+            alert(message);
+        }
+
+        function setupNavigation() {
+            const navItems = document.querySelectorAll('.nav-item');
+            navItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    const sectionId = this.getAttribute('data-section');
+                    if (sectionId) {
+                        showSection(sectionId);
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                    }
+                });
+            });
+
+            // Setup feature cards
+            const learnCard = document.getElementById('learnCard');
+            const supportCard = document.getElementById('supportCard');
+            
+            if (learnCard) {
+                learnCard.addEventListener('click', () => {
+                    showSection('learn');
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+            }
+            
+            if (supportCard) {
+                supportCard.addEventListener('click', () => {
+                    showSection('support');
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+            }
+        }
+
+        function setupButtons() {
+            const shareButton = document.getElementById('shareStoryBtn');
+            const langToggle = document.getElementById('langToggle');
+            const langButton = document.getElementById('langButton');
+            
+            if (shareButton) {
+                shareButton.addEventListener('click', shareStory);
+            }
+            
+            if (langToggle) {
+                langToggle.addEventListener('click', toggleLanguage);
+            }
+            
+            if (langButton) {
+                langButton.addEventListener('click', toggleLanguage);
+            }
+        }
+
+        function setupEmergencyContacts() {
+            const emergencyLinks = document.querySelectorAll('.crisis-link[href^="tel:"]');
+            emergencyLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    const confirmMessage = currentLanguage === 'en' ? 
+                        'This will call the crisis helpline. Continue?' : 
+                        'Tämä soittaa kriisipuhelimeen. Jatka?';
+                    
+                    if (!confirm(confirmMessage)) {
+                        e.preventDefault();
+                    }
+                });
+            });
+        }
+
+        function loadSavedPreferences() {
+            const savedLanguage = localStorage.getItem('ghostguard_language');
+            if (savedLanguage && (savedLanguage === 'en' || savedLanguage === 'fi')) {
+                currentLanguage = savedLanguage;
+            }
+        }
+
+        function initializeApp() {
+            loadSavedPreferences();
+            updateLanguage();
+            showSection('home');
+            setupNavigation();
+            setupButtons();
+            setupEmergencyContacts();
+            
+            console.log('GhostGuard app initialized successfully');
+        }
+
+        // Initialize when DOM is ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initializeApp);
+        } else {
+            initializeApp();
+        }
+    </script>
+</body>
+</html>
